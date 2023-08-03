@@ -14,12 +14,10 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class, args);
 	}
 
-
 	@Bean
 	public CommandLineRunner initData(ClientRepository repository) {
 		return (args) -> {
 			repository.save(new Client("Melba", "Morel","melba@mindhub.com"));
-
 		};
 	}
 }
