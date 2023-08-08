@@ -16,7 +16,7 @@ public class Client {
     private String lastName;
     private String email;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
-    Set<Account> accounts = new HashSet<>();
+    private Set<Account> accounts = new HashSet<>();
     public Client() {
     }
     public Client(String firstName, String lastName, String email) {
@@ -51,5 +51,15 @@ public class Client {
     public void addAccount(Account account) {
         account.setClient(this);
         this.accounts.add(account);
+    }
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", accounts=" + accounts +
+                '}';
     }
 }
