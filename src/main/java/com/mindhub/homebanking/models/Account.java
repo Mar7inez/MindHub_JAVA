@@ -1,16 +1,16 @@
 package com.mindhub.homebanking.models;
 
 import net.minidev.json.annotate.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Account {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GenericGenerator(name = "native", strategy = "native")
         private long id;
         private String number;
         private LocalDate creationDate;
@@ -33,33 +33,21 @@ public class Account {
             return id;
         }
 
-        public void setId(long id) {
-            this.id = id;
-        }
 
         public String getNumber() {
             return number;
         }
 
-        public void setNumber(String number) {
-            this.number = number;
-        }
 
         public LocalDate getCreationDate() {
             return creationDate;
         }
 
-        public void setCreationDate(LocalDate creationDate) {
-            this.creationDate = creationDate;
-        }
 
         public double getBalance() {
             return balance;
         }
 
-        public void setBalance(double balance) {
-            this.balance = balance;
-        }
 
         @JsonIgnore
         public Client getClient() {

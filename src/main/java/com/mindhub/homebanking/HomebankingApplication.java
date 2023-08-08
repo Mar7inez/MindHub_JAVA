@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -22,6 +23,7 @@ public class HomebankingApplication {
 		return (args) -> {
 
 			//Clients
+
 			Client client1 = new Client("Melba", "Morel","melba@mindhub.com");
 			clientRepository.save(client1);
 
@@ -34,18 +36,25 @@ public class HomebankingApplication {
 
 
 			//Accounts
-			Account account1 = new Account("VIN001",today,5000,client1);
+
+
+			Account account1 = new Account("VIN-0001",LocalDate.now(),5000,client1);
+			client1.addAccount(account1);
 			accountRepository.save(account1);
 
-			LocalDate tomorrow = today.plusDays(1);
-			Account account2 = new Account("VIN002", tomorrow, 7500,client1);
+
+
+
+			Account account2 = new Account("VIN-0002", LocalDate.now(), 7500,client1);
 			accountRepository.save(account2);
 
-			Account account3 = new Account("TEST",today,200000,client2);
+			Account account3 = new Account("TEST",LocalDate.now(),200000,client2);
 			accountRepository.save(account3);
 
-			Account account4 = new Account("TEST2",today,100000,client3);
+			Account account4 = new Account("TEST2",LocalDate.now(),100000,client3);
 			accountRepository.save(account4);
+
+
 
 
 		};

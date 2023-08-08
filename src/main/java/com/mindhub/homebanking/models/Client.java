@@ -10,12 +10,13 @@ import java.util.Set;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "native", strategy = "native")
     private long id;
     private String firstName;
     private String lastName;
     private String email;
     @OneToMany(mappedBy="client", fetch=FetchType.EAGER)
-    Set<Account> account = new HashSet<>();
+    Set<Account> accounts = new HashSet<>();
 
     public Client() {
     }
@@ -58,12 +59,12 @@ public class Client {
         this.email = email;
     }
 
-    public Set<Account> getAccount() {
-        return account;
+    public Set<Account> getAccounts() {
+        return accounts;
     }
 
     public void addAccount(Account account) {
         account.setClient(this);
-        this.account.add(account);
+        this.accounts.add(account);
     }
 }
