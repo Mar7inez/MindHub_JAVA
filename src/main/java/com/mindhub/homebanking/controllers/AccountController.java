@@ -19,18 +19,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/api")
 public class AccountController {
 
-    private final AccountRepository accountRepository;
-
     @Autowired
-    public AccountController(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
-
+    private AccountRepository accountRepository;
     @GetMapping("/accounts")
     public List<AccountDTO> getAllAccounts() {
         return accountRepository.findAll().stream().map(AccountDTO::new).collect(Collectors.toList());
     }
-
     @GetMapping("/accounts/{id}")
     public ResponseEntity<AccountDTO> getAccountById(@PathVariable long id) {
         Optional<Account> account = accountRepository.findById(id);

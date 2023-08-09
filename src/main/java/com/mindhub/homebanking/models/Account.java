@@ -23,35 +23,31 @@ public class Account {
         @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
         private Set<Transaction> transactions = new HashSet<>();
 
-        public Account(String number, LocalDate creationDate, double balance, Client client) {
-            this.number = number;
-            this.creationDate = creationDate;
-            this.balance = balance;
-            this.client = client;
-        }
-
         public Account() {
         }
+
+    public Account(String number, LocalDate creationDate, double balance) {
+        this.number = number;
+        this.creationDate = creationDate;
+        this.balance = balance;
+
+    }
 
         public long getId() {
             return id;
         }
 
-
         public String getNumber() {
             return number;
         }
-
 
         public LocalDate getCreationDate() {
             return creationDate;
         }
 
-
         public double getBalance() {
             return balance;
         }
-
 
         @JsonIgnore
         public Client getClient() {
@@ -67,5 +63,16 @@ public class Account {
         public void addTransaction(Transaction transaction){
         transaction.setAccount(this);
         transactions.add(transaction);
+    }
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", creationDate=" + creationDate +
+                ", balance=" + balance +
+                ", client=" + client +
+                ", transactions=" + transactions +
+                '}';
     }
 }

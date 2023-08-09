@@ -35,7 +35,6 @@ public class ClientController {
                                 .map(ResponseEntity::ok)
                                 .orElse(ResponseEntity.notFound().build());
     }
-
     @PostMapping("/clients")
     public ResponseEntity<?> createClient(@RequestBody ClientDTO clientDTO) {
         try {
@@ -46,6 +45,4 @@ public class ClientController {
             return new ResponseEntity<>("Error creating client: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }

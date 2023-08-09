@@ -9,6 +9,4 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface AccountRepository extends JpaRepository<Account, Long> {
-
-    List<Account> findByNumber(String number);
 }
