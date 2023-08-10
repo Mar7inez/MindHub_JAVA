@@ -1,12 +1,7 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.models.*;
+import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -25,8 +21,21 @@ public class HomebankingApplication {
 	@Bean
 	public CommandLineRunner initData(ClientRepository clientRepository,
 									  AccountRepository accountRepository,
-									  TransactionRepository transactionRepository) {
+									  TransactionRepository transactionRepository,
+									  LoanRepository loanRepository,
+									  ClientLoanRepository clientLoanRepository) {
 		return (args) -> {
+
+
+			//Add Loans and Save Loans
+			Loan loan1 = new Loan("Mortgage", 500000.0, List.of(12,24,36,48,60));
+			Loan loan2 = new Loan("Personal", 100000.0, List.of(6,12,24));
+			Loan loan3 = new Loan("Automotive", 300000.0, List.of(6,12,24,36));
+
+			loanRepository.save(loan1);
+			loanRepository.save(loan2);
+			loanRepository.save(loan3);
+
 
 			//Add Client
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com");
@@ -34,6 +43,10 @@ public class HomebankingApplication {
 			//Add account
 			Account account1 = new Account("VIN-0001", LocalDate.now(), 5000.0);
 			Account account2 = new Account("VIN-0002", LocalDate.now().plusDays(700), 7500.0);
+
+			//Add Loan to Client
+			ClientLoan clientLoan1 = new ClientLoan(400000.0, 60, client1, loan1);
+			client1.addClientLoan(clientLoan1);
 
 			//Add transactions
 			Transaction trans1  = new Transaction(TransactionType.CREDIT, 3000.0, "deposit", LocalDateTime.now());
@@ -84,6 +97,11 @@ public class HomebankingApplication {
 			client1.addAccount(account1);
 			client1.addAccount(account2);
 
+			//Add Loan to Client
+	//		loan1.addClientLoan(clientLoan1);
+	//		loan2.addClientLoan(clientLoan1);
+			loan3.addClientLoan(clientLoan1);
+
 			//Save Client
 			clientRepository.save(client1);
 
@@ -102,16 +120,10 @@ public class HomebankingApplication {
 			transactionRepository.save(trans8);
 			transactionRepository.save(trans9);
 			transactionRepository.save(trans10);
-			transactionRepository.save(trans11);
-			transactionRepository.save(trans12);
-			transactionRepository.save(trans13);
-			transactionRepository.save(trans14);
-			transactionRepository.save(trans15);
-			transactionRepository.save(trans16);
-			transactionRepository.save(trans17);
-			transactionRepository.save(trans18);
-			transactionRepository.save(trans19);
-			transactionRepository.save(trans20);
+
+			//Save Loan to Client
+			clientLoanRepository.save(clientLoan1);
+
 		};
 	}
 }
