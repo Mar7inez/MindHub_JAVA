@@ -29,6 +29,10 @@ public class Client {
         this.lastName = lastName;
         this.email = email;
     }
+    @JsonIgnore
+    public Set<Loan> getLoans(){
+        return clientLoans.stream().map(clientLoan -> clientLoan.getLoan()).collect(Collectors.toSet());
+    }
     public long getId() {
         return id;
     }
@@ -61,10 +65,8 @@ public class Client {
         clientLoan.setClient(this);
         this.clientLoans.add(clientLoan);
     }
-    @JsonIgnore
-    public Set<Loan> getLoans(){
-        return clientLoans.stream().map(clientLoan -> clientLoan.getLoan()).collect(Collectors.toSet());
-    }
+    public Set<ClientLoan> getClientLoans() { return clientLoans; }
+
     @Override
     public String toString() {
         return "Client{" +

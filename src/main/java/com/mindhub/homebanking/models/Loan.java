@@ -17,16 +17,13 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
-
     private String name;
-
     private Double maxAmount;
     @ElementCollection
     @Column(name = "payments")
     private List<Integer> payments = new ArrayList<>();
-
     @OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
-    private Set<ClientLoan> clientLoan = new HashSet<>();
+    private Set<ClientLoan> clientLoans = new HashSet<>();
 
     public Loan(){}
 
@@ -36,49 +33,34 @@ public class Loan {
         this.payments = payments;
     }
 
-    public void addClientLoan(ClientLoan clientLoan){
-        clientLoan.setLoan(this);
-        this.clientLoan.add(clientLoan);
-    }
-
-    public Set<Client> getClients(){
-
-        return clientLoan.stream().map(clientLoan -> clientLoan.getClient()).collect(toSet());
-
-    }
-
     public Long getId() {
         return id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public Double getMaxAmount() {
         return maxAmount;
     }
-
     public void setMaxAmount(Double maxAmount) {
         this.maxAmount = maxAmount;
     }
-
     public List<Integer> getPayments() {
         return payments;
     }
-
     public void setPayments(List<Integer> payments) {
         this.payments = payments;
     }
+    public Set<Client> getClients(){return clientLoans.stream().map(clientLoan -> clientLoan.getClient()).collect(toSet());}
+    public Set<ClientLoan> getClientLoans(){return clientLoans;}
+    public void setClientLoans(Set<ClientLoan> clientLoans) {this.clientLoans = clientLoans;}
 
-    public Set<ClientLoan> getClientLoan(){
-
-        return clientLoan;
-
+    public void addClientLoan(ClientLoan clientLoan){
+        clientLoan.setLoan(this);
+        this.clientLoans.add(clientLoan);
     }
 
     @Override

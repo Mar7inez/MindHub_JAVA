@@ -4,15 +4,10 @@ import com.mindhub.homebanking.models.ClientLoan;
 
 public class ClientLoanDTO {
     private Long id;
-
     private Long loanId;
-
     private String name;
-
     private Double amount;
-
     private int payment;
-
     public ClientLoanDTO(){}
 
     public ClientLoanDTO(ClientLoan clientLoan){
@@ -23,7 +18,7 @@ public class ClientLoanDTO {
 
         name = clientLoan.getLoan().getName();
 
-        amount = clientLoan.getMount();
+        amount = clientLoan.getAmount();
 
         payment = clientLoan.getPayment();
 

@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
@@ -26,27 +27,40 @@ public class HomebankingApplication {
 									  ClientLoanRepository clientLoanRepository) {
 		return (args) -> {
 
+			//Create and save Loans
+			Loan loanMortgage = new Loan("Mortgage", 500000.0, List.of(12,24,36,48,60));
+			Loan loanPersonal = new Loan("Personal", 100000.0, List.of(6,12,24));
+			Loan loanAutomotive = new Loan("Automotive", 300000.0, List.of(6,12,24,36));
 
-			//Add Loans and Save Loans
-			Loan loan1 = new Loan("Mortgage", 500000.0, List.of(12,24,36,48,60));
-			Loan loan2 = new Loan("Personal", 100000.0, List.of(6,12,24));
-			Loan loan3 = new Loan("Automotive", 300000.0, List.of(6,12,24,36));
-
-			loanRepository.save(loan1);
-			loanRepository.save(loan2);
-			loanRepository.save(loan3);
+			loanRepository.save(loanMortgage);
+			loanRepository.save(loanPersonal);
+			loanRepository.save(loanAutomotive);
 
 
-			//Add Client
+			//Create -> Clients, Accounts
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com");
+			Client client2 = new Client("Cliente2", "Sarasa", "sarasa@mindhub.com");
 
-			//Add account
 			Account account1 = new Account("VIN-0001", LocalDate.now(), 5000.0);
-			Account account2 = new Account("VIN-0002", LocalDate.now().plusDays(700), 7500.0);
+			Account account2 = new Account("VIN-0002", LocalDate.now().plusDays(1), 7500.0);
+			Account account3 = new Account("VIN-0003", LocalDate.now(), 12345.0);
+			Account account4 = new Account("VIN-0004", LocalDate.now().plusDays(1), 4321.0);
 
-			//Add Loan to Client
-			ClientLoan clientLoan1 = new ClientLoan(400000.0, 60, client1, loan1);
+			ClientLoan clientLoan1 = new ClientLoan(400000.0, 60, client1, loanMortgage);
+			ClientLoan clientLoan2 = new ClientLoan(50000.0, 12, client1, loanPersonal);
+			ClientLoan clientLoan3 = new ClientLoan(100000.0, 24, client2, loanPersonal);
+			ClientLoan clientLoan4 = new ClientLoan(200000.0, 36, client2, loanAutomotive);
+
 			client1.addClientLoan(clientLoan1);
+			client1.addClientLoan(clientLoan2);
+
+			client2.addClientLoan(clientLoan3);
+			client2.addClientLoan(clientLoan4);
+
+			loanMortgage.addClientLoan(clientLoan1);
+			loanPersonal.addClientLoan(clientLoan2);
+			loanPersonal.addClientLoan(clientLoan3);
+			loanAutomotive.addClientLoan(clientLoan4);
 
 			//Add transactions
 			Transaction trans1  = new Transaction(TransactionType.CREDIT, 3000.0, "deposit", LocalDateTime.now());
@@ -97,11 +111,6 @@ public class HomebankingApplication {
 			client1.addAccount(account1);
 			client1.addAccount(account2);
 
-			//Add Loan to Client
-	//		loan1.addClientLoan(clientLoan1);
-	//		loan2.addClientLoan(clientLoan1);
-			loan3.addClientLoan(clientLoan1);
-
 			//Save Client
 			clientRepository.save(client1);
 
@@ -120,9 +129,38 @@ public class HomebankingApplication {
 			transactionRepository.save(trans8);
 			transactionRepository.save(trans9);
 			transactionRepository.save(trans10);
+			transactionRepository.save(trans11);
+			transactionRepository.save(trans12);
+			transactionRepository.save(trans13);
+			transactionRepository.save(trans14);
+			transactionRepository.save(trans15);
+			transactionRepository.save(trans16);
+			transactionRepository.save(trans17);
+			transactionRepository.save(trans18);
+			transactionRepository.save(trans19);
+			transactionRepository.save(trans20);
 
-			//Save Loan to Client
+
+			client1.addAccount(account1);
+			client1.addAccount(account2);
+			client2.addAccount(account3);
+			client2.addAccount(account4);
+
+			clientRepository.save(client1);
+			clientRepository.save(client2);
+
+			accountRepository.save(account1);
+			accountRepository.save(account2);
+			accountRepository.save(account3);
+			accountRepository.save(account4);
+
+
+
+
 			clientLoanRepository.save(clientLoan1);
+			clientLoanRepository.save(clientLoan2);
+			clientLoanRepository.save(clientLoan3);
+			clientLoanRepository.save(clientLoan4);
 
 		};
 	}
