@@ -11,7 +11,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootApplication
 public class HomebankingApplication {
@@ -24,7 +26,8 @@ public class HomebankingApplication {
 									  AccountRepository accountRepository,
 									  TransactionRepository transactionRepository,
 									  LoanRepository loanRepository,
-									  ClientLoanRepository clientLoanRepository) {
+									  ClientLoanRepository clientLoanRepository,
+									  CardRepository cardRepository) {
 		return (args) -> {
 
 			//Create and save Loans
@@ -113,6 +116,23 @@ public class HomebankingApplication {
 
 			//Save Client
 			clientRepository.save(client1);
+			clientRepository.save(client2);
+
+			//Cards
+			Card card1 = new Card(CardType.CREDIT, CardColor.GOLD, "Melba Morel", "6651 9547 3949 1228", "621", LocalDate.now(), LocalDate.now().plusYears(5));
+			Card card2 = new Card(CardType.CREDIT, CardColor.SILVER, "Melba Morel", "2464 0496 1574 7110", "962", LocalDate.now(), LocalDate.now().plusYears(5));
+			Card card3 = new Card(CardType.CREDIT, CardColor.TITANIUM, "Cliente2", "2432 0234 1342 2321", "892", LocalDate.now(),LocalDate.now().plusYears(1));
+			client1.addCard(card1);
+			client1.addCard(card2);
+			client2.addCard(card3);
+
+			cardRepository.save(card1);
+			cardRepository.save(card2);
+			cardRepository.save(card3);
+			clientRepository.save(client1);
+
+
+
 
 			//Save Accounts
 			accountRepository.save(account1);
@@ -161,6 +181,8 @@ public class HomebankingApplication {
 			clientLoanRepository.save(clientLoan2);
 			clientLoanRepository.save(clientLoan3);
 			clientLoanRepository.save(clientLoan4);
+
+
 
 		};
 	}
