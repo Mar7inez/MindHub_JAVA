@@ -120,18 +120,18 @@ public class HomebankingApplication {
 
 			//Cards
             //Credit
-			Card card1 = new Card(CardType.CREDIT, CardColor.GOLD, "Melba Morel", "6651 9547 3949 1228", "621", LocalDate.now(), LocalDate.now().plusYears(5));
-			Card card2 = new Card(CardType.CREDIT, CardColor.SILVER, "Melba Morel", "2464 0496 1574 7110", "962", LocalDate.now(), LocalDate.now().plusYears(5));
-			Card card3 = new Card(CardType.CREDIT, CardColor.TITANIUM, "Cliente2", "2432 0234 1342 2321", "892", LocalDate.now(),LocalDate.now().plusYears(1));
+			Card card1 = new Card(CardType.CREDIT, CardColor.TITANIUM, "Melba Morel", "6651 9547 3949 1228", "621", LocalDate.now(), LocalDate.now().plusYears(5));
+		//	Card card2 = new Card(CardType.CREDIT, CardColor.SILVER, "Melba Morel", "2464 0496 1574 7110", "962", LocalDate.now(), LocalDate.now().plusYears(5));
+			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, "Cliente2", "2432 0234 1342 2321", "892", LocalDate.now(),LocalDate.now().plusYears(4));
 			//Debit
-            Card card4 = new Card(CardType.DEBIT, CardColor.TITANIUM, "Melba Morel", "3212 6523 4523 6587", "777", LocalDate.now(),LocalDate.now().plusYears(1));
+            Card card4 = new Card(CardType.DEBIT, CardColor.GOLD, "Melba Morel", "3212 6523 4523 6587", "777", LocalDate.now(),LocalDate.now().plusYears(1));
             client1.addCard(card1);
-            client1.addCard(card2);
+         //   client1.addCard(card2);
             client1.addCard(card4);
 			client2.addCard(card3);
 
 			cardRepository.save(card1);
-			cardRepository.save(card2);
+		//	cardRepository.save(card2);
 			cardRepository.save(card3);
             cardRepository.save(card4);
 			clientRepository.save(client1);

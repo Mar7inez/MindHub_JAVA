@@ -26,9 +26,7 @@ public class Card {
 
     private LocalDate thruDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
-    private Account account;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
@@ -116,12 +114,6 @@ public class Card {
         this.client = client;
     }
 
-    public Account getAccount() {
-        return account;
-    }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 
 }
