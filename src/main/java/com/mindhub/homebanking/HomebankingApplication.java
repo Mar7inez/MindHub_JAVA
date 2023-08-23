@@ -2,10 +2,12 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,6 +19,9 @@ import java.util.Set;
 
 @SpringBootApplication
 public class HomebankingApplication {
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class, args);
@@ -41,8 +46,11 @@ public class HomebankingApplication {
 
 
 			//Create -> Clients, Accounts
-			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com");
-			Client client2 = new Client("Cliente2", "Sarasa", "sarasa@mindhub.com");
+			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("password"));
+			Client client2 = new Client("Rodrigo", "Ribeiro", "test@mindhub.com", passwordEncoder.encode("1234"));
+
+			Client admin = new Client("admin", "admin", "admin@gmail.com",passwordEncoder.encode("admin"));
+
 
 			Account account1 = new Account("VIN-0001", LocalDate.now(), 5000.0);
 			Account account2 = new Account("VIN-0002", LocalDate.now().plusDays(1), 7500.0);
@@ -117,11 +125,11 @@ public class HomebankingApplication {
 			//Save Client
 			clientRepository.save(client1);
 			clientRepository.save(client2);
+			clientRepository.save(admin);
 
 			//Cards
             //Credit
 			Card card1 = new Card(CardType.CREDIT, CardColor.TITANIUM, "Melba Morel", "6651 9547 3949 1228", "621", LocalDate.now(), LocalDate.now().plusYears(5));
-		//	Card card2 = new Card(CardType.CREDIT, CardColor.SILVER, "Melba Morel", "2464 0496 1574 7110", "962", LocalDate.now(), LocalDate.now().plusYears(5));
 			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, "Cliente2", "2432 0234 1342 2321", "892", LocalDate.now(),LocalDate.now().plusYears(4));
 			//Debit
             Card card4 = new Card(CardType.DEBIT, CardColor.GOLD, "Melba Morel", "3212 6523 4523 6587", "777", LocalDate.now(),LocalDate.now().plusYears(1));
@@ -186,6 +194,7 @@ public class HomebankingApplication {
 			clientLoanRepository.save(clientLoan2);
 			clientLoanRepository.save(clientLoan3);
 			clientLoanRepository.save(clientLoan4);
+
 
 
 
