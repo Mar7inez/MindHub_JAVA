@@ -58,7 +58,7 @@ public class Account {
             this.client = client;
         }
 
-         public Set<Transaction> getTransactions(){ return transactions; }
+        public Set<Transaction> getTransactions(){ return transactions; }
 
         public void addTransaction(Transaction transaction){
         transaction.setAccount(this);

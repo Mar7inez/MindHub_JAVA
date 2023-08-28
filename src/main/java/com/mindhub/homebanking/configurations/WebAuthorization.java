@@ -25,11 +25,11 @@ class WebAuthorization extends WebSecurityConfigurerAdapter {
 
                 .antMatchers("/web/index.html", "/web/img/**", "/web/css/**", "/web/js/index.js" ).permitAll()
 
-                .antMatchers(HttpMethod.POST,"/api/clients").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/clients/**", "/api/clients/current/**"," /api/clients/current/","/api/clients/current/cards").permitAll()
 
                 .antMatchers("/rest/**").hasAuthority("ADMIN")
 
-                .antMatchers(HttpMethod.GET, "/api/clients/current", "/api/accounts/**", "/web/**" ).hasAnyAuthority("CLIENT","ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/clients/current","/api/clients/current/cards", "/api/accounts/**", "/web/**" , "/api/clients/current/**" ).hasAnyAuthority("CLIENT","ADMIN")
 
                 .antMatchers("/api/**").hasAuthority("ADMIN");
 
@@ -43,7 +43,7 @@ class WebAuthorization extends WebSecurityConfigurerAdapter {
                 .loginPage("/api/login");
 
 
-        http.logout().logoutUrl("/api/logout").deleteCookies();
+        http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
 
         // turn off checking for CSRF tokens
 

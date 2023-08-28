@@ -49,7 +49,7 @@ public class HomebankingApplication {
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("password"));
 			Client client2 = new Client("Rodrigo", "Ribeiro", "test@mindhub.com", passwordEncoder.encode("1234"));
 
-			Client admin = new Client("admin", "admin", "admin@gmail.com",passwordEncoder.encode("admin"));
+			Client admin = new Client("admin", "admin", "admin@admin.com",passwordEncoder.encode("admin"));
 
 
 			Account account1 = new Account("VIN-0001", LocalDate.now(), 5000.0);
@@ -129,10 +129,10 @@ public class HomebankingApplication {
 
 			//Cards
             //Credit
-			Card card1 = new Card(CardType.CREDIT, CardColor.TITANIUM, "Melba Morel", "6651 9547 3949 1228", "621", LocalDate.now(), LocalDate.now().plusYears(5));
-			Card card3 = new Card(CardType.CREDIT, CardColor.SILVER, "Cliente2", "2432 0234 1342 2321", "892", LocalDate.now(),LocalDate.now().plusYears(4));
+			Card card1=new Card(LocalDate.now(),LocalDate.now().plusYears(5),211,"2225-6724-56336-2889","Melba Morel",CardType.CREDIT,CardColor.TITANIUM);
+			Card card3=new Card(LocalDate.now(),LocalDate.now().plusYears(5),113,"2255-5666-3634-1112","Cliente Cliente",CardType.CREDIT,CardColor.SILVER);
 			//Debit
-            Card card4 = new Card(CardType.DEBIT, CardColor.GOLD, "Melba Morel", "3212 6523 4523 6587", "777", LocalDate.now(),LocalDate.now().plusYears(1));
+			Card card4=new Card(LocalDate.now(),LocalDate.now().plusYears(5),122,"3325-6745-7876-4445","Melba Morel",CardType.DEBIT,CardColor.GOLD);
             client1.addCard(card1);
          //   client1.addCard(card2);
             client1.addCard(card4);

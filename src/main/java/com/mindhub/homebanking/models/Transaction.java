@@ -18,6 +18,7 @@ public class Transaction {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "account_id")
     private Account account;
+
     public Transaction(){}
     public Transaction(TransactionType type, Double amount, String description, LocalDateTime date){
         this.type = type;

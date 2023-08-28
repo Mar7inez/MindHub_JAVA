@@ -3,45 +3,33 @@ package com.mindhub.homebanking.DTO;
 import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
+import com.mindhub.homebanking.models.Client;
 
 import java.time.LocalDate;
 
 public class CardDTO {
     private Long id;
-    private CardType type;
-    private CardColor color;
-    private String holder;
-    private String number;
-    private String cvv;
     private LocalDate fromDate;
     private LocalDate thruDate;
-    public CardDTO(Card card){
+    private int cvv;
+    private String number;
+    private String cardholder;
+    private CardType type;
+    private CardColor color;
+
+    public CardDTO(Card card) {
         id = card.getId();
-        type = card.getCardType();
-        color = card.getCardColor();
-        holder = card.getCardHolder();
-        number = card.getNumber();
-        cvv = card.getCvv();
         fromDate = card.getFromDate();
         thruDate = card.getThruDate();
+        cvv = card.getCvv();
+        number = card.getNumber();
+        cardholder = card.getCardholder();
+        type = card.getType();
+        color = card.getColor();
     }
+
     public Long getId() {
         return id;
-    }
-    public CardType getType() {
-        return type;
-    }
-    public CardColor getColor() {
-        return color;
-    }
-    public String getHolder() {
-        return holder;
-    }
-    public String getNumber() {
-        return number;
-    }
-    public String getCvv() {
-        return cvv;
     }
     public LocalDate getFromDate() {
         return fromDate;
@@ -49,4 +37,20 @@ public class CardDTO {
     public LocalDate getThruDate() {
         return thruDate;
     }
+    public int getCvv() {
+        return cvv;
+    }
+    public String getNumber() {
+        return number;
+    }
+    public String getCardholder() {
+        return cardholder;
+    }
+    public CardType getType() {
+        return type;
+    }
+    public CardColor getColor() {
+        return color;
+    }
+
 }

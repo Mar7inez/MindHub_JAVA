@@ -8,20 +8,13 @@ public class ClientLoanDTO {
     private String name;
     private Double amount;
     private int payments;
-    public ClientLoanDTO(){}
 
     public ClientLoanDTO(ClientLoan clientLoan){
-
         id = clientLoan.getId();
-
         loanId = clientLoan.getLoan().getId();
-
         name = clientLoan.getLoan().getName();
-
         amount = clientLoan.getAmount();
-
         payments = clientLoan.getPayment();
-
     }
 
     public Long getId() {
