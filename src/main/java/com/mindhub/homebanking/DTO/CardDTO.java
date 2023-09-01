@@ -10,17 +10,22 @@ import java.time.LocalDate;
 public class CardDTO {
     private Long id;
     private LocalDate fromDate;
-    private LocalDate thruDate;
+    private LocalDate truDate;
     private int cvv;
     private String number;
     private String cardholder;
     private CardType type;
     private CardColor color;
 
+    private Client client;
+
+    public CardDTO() {
+    }
+
     public CardDTO(Card card) {
         id = card.getId();
         fromDate = card.getFromDate();
-        thruDate = card.getThruDate();
+        truDate = card.getTruDate();
         cvv = card.getCvv();
         number = card.getNumber();
         cardholder = card.getCardholder();
@@ -31,26 +36,34 @@ public class CardDTO {
     public Long getId() {
         return id;
     }
+
     public LocalDate getFromDate() {
         return fromDate;
     }
-    public LocalDate getThruDate() {
-        return thruDate;
+
+    public LocalDate getTruDate() {
+        return truDate;
     }
+
     public int getCvv() {
         return cvv;
     }
+
     public String getNumber() {
         return number;
     }
+
     public String getCardholder() {
         return cardholder;
     }
+
     public CardType getType() {
         return type;
     }
+
     public CardColor getColor() {
         return color;
     }
+
 
 }

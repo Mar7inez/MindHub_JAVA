@@ -1,39 +1,29 @@
 package com.mindhub.homebanking.DTO;
 
+import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.models.TransactionType;
 
 import java.time.LocalDateTime;
 
-public class TransactionDTO {
+public class TransactionDTO{
     private Long id;
     private TransactionType type;
-    private Double amount;
-    private LocalDateTime date;
+    private LocalDateTime creationDate;
     private String description;
+    private Account account;
+    private double amount;
+
 
     public TransactionDTO(Transaction transaction) {
-        this.id = transaction.getId();
         this.type = transaction.getType();
-        this.amount = transaction.getAmount();
-        this.date = transaction.getDate();
+        this.creationDate = transaction.getCreationDate();
         this.description = transaction.getDescription();
+        this.amount=transaction.getAmount();
     }
-
-    public Long getId() {
-        return id;
-    }
-    public TransactionType getType() {
-        return type;
-    }
-    public Double getAmount() {
-        return amount;
-    }
-    public LocalDateTime getDate() {
-        return date;
-    }
-    public String getDescription() {
-        return description;
-    }
-
+    public double getAmount() {return amount;}
+    public LocalDateTime getCreationDate() {return creationDate;}
+    public String getDescription() {return description;}
+    public TransactionType getType() {return type;}
+    public void setAccount(Account account) {this.account = account;}
 }

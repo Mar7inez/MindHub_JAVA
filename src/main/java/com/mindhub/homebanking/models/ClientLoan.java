@@ -8,11 +8,11 @@ import javax.persistence.*;
 @Entity
 public class ClientLoan {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GeneratedValue(strategy= GenerationType.AUTO,generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
-    private Double amount;
-    private int payment;
+    private double amount;
+    private Integer payments;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
@@ -20,38 +20,48 @@ public class ClientLoan {
     @JoinColumn(name = "loan_id")
     private Loan loan;
 
-    public ClientLoan(){}
 
-    public ClientLoan(Double amount, int payment, Client client, Loan loan) {
+    public ClientLoan() {
+    }
+
+    public ClientLoan(double amount, Integer payments) {
         this.amount = amount;
-        this.payment = payment;
+        this.payments = payments;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public void setPayments(Integer payments) {
+        this.payments = payments;
+    }
+
+    public void setClient(Client client) {
         this.client = client;
+    }
+
+    public void setLoan(Loan loan) {
         this.loan = loan;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public Integer getPayments() {
+        return payments;
+    }
+    @JsonIgnore
+    public Client getClient() {
+        return client;
     }
 
     public Long getId() {
         return id;
     }
-    public Double getAmount() {
-        return amount;
-    }
-    public void setAmount(Double mount) {
-        this.amount = mount;
-    }
-    public int getPayment() {
-        return payment;
-    }
-    public void setPayment(int payment) {
-        this.payment = payment;
-    }
-    public Client getClient() {
-        return client;
-    }
-    public void setClient(Client client) {
-        this.client = client;
-    }
-    public Loan getLoan() {return loan;}
-    public void setLoan(Loan loan) {
-        this.loan = loan;
+
+    public Loan getLoan() {
+        return loan;
     }
 }

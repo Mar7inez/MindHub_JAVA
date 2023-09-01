@@ -12,63 +12,59 @@ public class Transaction {
     @GenericGenerator(name = "native", strategy = "native")
     private Long id;
     private TransactionType type;
-    private Double amount;
+    private LocalDateTime creationDate;
     private String description;
-    private LocalDateTime date;
+    private double amount;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name="account_id")
     private Account account;
 
     public Transaction(){}
-    public Transaction(TransactionType type, Double amount, String description, LocalDateTime date){
+
+    public Transaction(TransactionType type, LocalDateTime creationDate, String description, double amount) {
         this.type = type;
-        this.amount = amount;
+        this.creationDate = creationDate;
         this.description = description;
-        this.date = date;
+        this.amount = amount;
     }
 
-    public Long getId() {
-        return id;
-    }
-    public TransactionType getType() {
-        return type;
-    }
-    public void setType(TransactionType type) {
-        this.type = type;
-    }
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
-    public void setAmount(Double amount) {
+
+    public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
-    public LocalDateTime getDate() {
-        return date;
+
+    public TransactionType getType() {
+        return type;
     }
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+
+    public void setType(TransactionType type) {
+        this.type = type;
     }
+
     public Account getAccount() {
         return account;
     }
+
     public void setAccount(Account account) {
         this.account = account;
-    }
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", type=" + type +
-                ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", account=" + account +
-                '}';
     }
 }
