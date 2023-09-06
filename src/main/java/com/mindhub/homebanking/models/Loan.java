@@ -39,6 +39,8 @@ public class Loan {
     public void addClientLoan(ClientLoan clientLoan){
         clientLoan.setLoan(this);
         clientLoans.add(clientLoan);
+
+
     }
     public String getName() {
         return name;

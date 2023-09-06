@@ -22,28 +22,35 @@ import java.util.Random;
 public class CardController {
 
     @Autowired
-    ClientService clientService;
+    private ClientService clientService;
     @Autowired
-    CardService cardService;
+    private CardService cardService;
     @PostMapping(path = "/clients/current/cards")
     public ResponseEntity<?> createCard( Authentication authentication,
-                                         @RequestParam CardType type, @RequestParam CardColor color) {
-        String email=authentication.getName();
-        Client client=clientService.findByEmail(email);
+                                         @RequestParam CardType type,
+                                         @RequestParam CardColor color) {
 
+        String email = authentication.getName();
+        Client client = clientService.findByEmail(email);
+        if(type == null ){
+            return new ResponseEntity<>("Select card type please", HttpStatus.FORBIDDEN);
+        }
+        if(color == null){
+            return new ResponseEntity<>("Select card color please", HttpStatus.FORBIDDEN);
+        }
         if (cardService.findByClientAndColorAndType(client,color,type)!=null ) {
             return new ResponseEntity<>("Card already exist", HttpStatus.FORBIDDEN);
         }
         int cvvRandom = new Random().nextInt(900)+100;
-        String cardHolder=client.getFirstName()+" "+client.getLastName();
+        String cardHolder = client.getFirstName()+" "+client.getLastName();
 
         String randomCardNumber;
         do{
-            Random random=new Random();
-            randomCardNumber=random.nextInt(9999)+"-"+random.nextInt(9999)+"-"+random.nextInt(9999)+"-"+random.nextInt(9999);
+            Random random = new Random();
+            randomCardNumber = random.nextInt(9999)+"-"+random.nextInt(9999)+"-"+random.nextInt(9999)+"-"+random.nextInt(9999);
         }while(cardService.findByNumber(randomCardNumber)!=null);
 
-        Card card=new Card(LocalDate.now(),LocalDate.now().plusYears(5),cvvRandom,randomCardNumber,cardHolder,type,color);
+        Card card = new Card(LocalDate.now(),LocalDate.now().plusYears(5),cvvRandom,randomCardNumber,cardHolder,type,color);
         client.addCard(card);
         cardService.saveCard(card);
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);

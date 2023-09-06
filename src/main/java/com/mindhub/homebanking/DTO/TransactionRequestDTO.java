@@ -1,13 +1,20 @@
 package com.mindhub.homebanking.DTO;
 
 public class TransactionRequestDTO {
-
-    private String accountFromNumber;
-    private String accountToNumber;
     private double amount;
     private String description;
+    private String originAccount;
+    private String destinationAccount;
 
+    public TransactionRequestDTO() {
+    }
 
+    public TransactionRequestDTO(double amount, String description, String originAccount, String destinationAccount) {
+        this.amount = amount;
+        this.description = description;
+        this.originAccount = originAccount;
+        this.destinationAccount = destinationAccount;
+    }
 
     public double getAmount() {
         return amount;
@@ -17,11 +24,11 @@ public class TransactionRequestDTO {
         return description;
     }
 
-    public String getAccountFromNumber() {
-        return accountFromNumber;
+    public String getOriginAccount() {
+        return originAccount;
     }
 
-    public String getAccountToNumber() {
-        return accountToNumber;
+    public String getDestinationAccount() {
+        return destinationAccount;
     }
 }

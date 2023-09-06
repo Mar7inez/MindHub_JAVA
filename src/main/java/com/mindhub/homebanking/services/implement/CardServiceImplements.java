@@ -14,6 +14,7 @@ public class CardServiceImplements implements CardService {
     @Autowired
     CardRepository cardRepository;
 
+
     @Override
     public Card findByClientAndColorAndType(Client client, CardColor color, CardType type) {
         return  cardRepository.findByClientAndColorAndType(client, color, type);

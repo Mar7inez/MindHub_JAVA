@@ -21,9 +21,19 @@ public class TransactionDTO{
         this.description = transaction.getDescription();
         this.amount=transaction.getAmount();
     }
-    public double getAmount() {return amount;}
-    public LocalDateTime getCreationDate() {return creationDate;}
-    public String getDescription() {return description;}
-    public TransactionType getType() {return type;}
-    public void setAccount(Account account) {this.account = account;}
+    public double getAmount() {
+        return amount;
+    }
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public TransactionType getType() {
+        return type;
+    }
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 }
