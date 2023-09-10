@@ -51,12 +51,12 @@
 }
 
 .menu-logo {
-    width: 100px;
-    height: 40px;
+    width: 120px;
+    height: 140px;
 }
 
 .welcome {
-    background: linear-gradient(45deg, #5573f8cc, #2d0a66);
+    background: linear-gradient(45deg, rgba(134, 136, 142, 0.8), #676173);
 }
 
 .welcome-logo {
