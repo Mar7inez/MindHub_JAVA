@@ -6,4 +6,4 @@ EXPOSE 8080
 
 RUN gradle build
 
-ENTRYPOINT ["java", "-Xmx512m" , "-jar", "build/libs/homebanking-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-Xmx1g", "-jar", "build/libs/homebanking-0.0.1-SNAPSHOT.jar"]
