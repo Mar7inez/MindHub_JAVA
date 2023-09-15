@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.controllers;
 
+import com.mindhub.homebanking.DTO.CardDTO;
 import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
@@ -54,6 +55,15 @@ public class CardController {
         client.addCard(card);
         cardService.saveCard(card);
         return new ResponseEntity<>("Card created",HttpStatus.CREATED);
+    }
+
+    @PatchMapping(path = "/cards/delete")
+    public void deleteCard(Authentication authentication, @RequestBody CardDTO cardDTO){
+        String email=authentication.getName();
+        Client client=clientService.findByEmail(email);
+        Card card=cardService.findByNumber(cardDTO.getNumber());
+        card.setDeleted(true);
+        cardService.saveCard(card);
     }
 
 

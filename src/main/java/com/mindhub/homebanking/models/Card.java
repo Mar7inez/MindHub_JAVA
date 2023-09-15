@@ -19,6 +19,7 @@ public class Card {
     private String cardholder;
     private CardType type;
     private CardColor color;
+    private boolean deleted;
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "client_id")
     private Client client;
@@ -34,6 +35,7 @@ public class Card {
         this.cardholder = cardholder;
         this.type = type;
         this.color = color;
+        this.deleted = deleted;
     }
 
     public Long getId() {
@@ -102,5 +104,13 @@ public class Card {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

@@ -19,6 +19,8 @@ public class CardDTO {
 
     private Client client;
 
+    private boolean deleted;
+
     public CardDTO() {
     }
 
@@ -31,6 +33,7 @@ public class CardDTO {
         cardholder = card.getCardholder();
         type = card.getType();
         color = card.getColor();
+        deleted=card.isDeleted();
     }
 
     public Long getId() {
@@ -65,5 +68,11 @@ public class CardDTO {
         return color;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }
