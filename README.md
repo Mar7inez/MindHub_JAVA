@@ -14,6 +14,3 @@ Deploy w/DB Postgres 15 -> [https://homebankingpostgres.onrender.com/web/index.h
 -Postresql
 -Docker
 
-
-![Uploading image.png…]()
-
